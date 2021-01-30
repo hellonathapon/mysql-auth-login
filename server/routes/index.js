@@ -19,6 +19,9 @@ module.exports = function( db ) {
                 }
                 res.status(200).send();
 
+                // # unhash password and compare to claim one
+                // # generate JWT to store in localstorage or cookie
+
             })
 
         } catch (error) {

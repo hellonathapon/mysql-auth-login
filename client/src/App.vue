@@ -29,11 +29,15 @@
 
       <v-btn text to="/">
         <span class="mr-2">Home</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <v-icon>mdi-home-roof</v-icon>
       </v-btn>
-      <v-btn text to="/about">
+      <v-btn text to="/login">
         <span class="mr-2">Login</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <v-icon>mdi-login-variant</v-icon>
+      </v-btn>
+      <v-btn text to="/register">
+        <span class="mr-2">Register</span>
+        <v-icon>mdi-account-plus-outline</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -44,14 +48,9 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
-
-  components: {
-    // HelloWorld,
-  },
 
   data: () => ({
     //
