@@ -14,8 +14,29 @@
           >
 
             <v-text-field
+              v-model="credentials.firstName"
+              :rules="rules.firstName"
+              label="First name"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="credentials.lastName"
+              :rules="rules.lastName"
+              label="Last name"
+              required
+            ></v-text-field>
+            <v-slider
+              v-model="credentials.age"
+              color="orange"
+              label="Age"
+              hint="Be honest"
+              min="1"
+              max="100"
+              thumb-label
+            ></v-slider>
+            <v-text-field
               v-model="credentials.email"
-              :rules="emailRules"
+              :rules="rules.email"
               label="E-mail"
               required
             ></v-text-field>
@@ -23,18 +44,27 @@
             <v-text-field
               v-model="credentials.password"
               :counter="10"
-              :rules="passwordRules"
+              :rules="rules.password"
               label="Password"
               required
             ></v-text-field>
+            <v-text-field
+              v-model="credentials.confirmPassword"
+              :counter="10"
+              :rules="rules.confirmPassword"
+              label="Confirm Password"
+              required
+            ></v-text-field>
+
+            
 
             <v-btn
               :disabled="!valid"
               color="success"
               class="mr-4"
-              @click="hanldeSubmit"
+              @click="submitRegister"
             >
-              Login
+              Register
             </v-btn>
           </v-form>
         </v-col>
@@ -44,21 +74,38 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
    name: 'Signup',
    data: () => ({
       credentials: {
+        firstName: '',
+        lastName: '',
+        age: 0,
         email: '',
         password: '',
+        confirmPassword: ''
       },
       valid: true,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      passwordRules: [
-        v => !!v || 'Password is required',
-      ],
+      rules: {
+        firstName: [v => !!v || 'First name is required'],
+        lastName: [v => !!v || 'Last name is required'],
+        email: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        ],
+        password: [v => !!v || 'Password is required'],
+        confirmPassword: [v => !!v || 'Confirm Password is required']
+      },
   }),
+  methods: {
+    submitRegister: function() {
+      const url = `http://localhost:5000/register`
+      axios.post(url, this.credentials)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+  }
 }
 </script>
