@@ -67,7 +67,10 @@ export default {
       e.preventDefault();
       // console.log(this.credentials)
       axios.post(`http://localhost:5000/login`, this.credentials,  {withCredentials: true})
-        .then(res => console.log(res))
+        .then(res => {
+          console.log(res)
+          this.$router.push('/user')
+        })
         .catch(err => console.log(err))
     }
   }

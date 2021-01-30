@@ -25,15 +25,7 @@
               label="Last name"
               required
             ></v-text-field>
-            <v-slider
-              v-model="credentials.age"
-              color="orange"
-              label="Age"
-              hint="Be honest"
-              min="1"
-              max="100"
-              thumb-label
-            ></v-slider>
+
             <v-text-field
               v-model="credentials.email"
               :rules="rules.email"
@@ -82,7 +74,6 @@ export default {
       credentials: {
         firstName: '',
         lastName: '',
-        age: 0,
         email: '',
         password: '',
         confirmPassword: ''

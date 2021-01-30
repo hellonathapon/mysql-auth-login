@@ -6,14 +6,16 @@
       class="app-bar"
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+        <router-link to='/'>
+            <v-img
+            alt="Vuetify Logo"
+            class="shrink mr-2"
+            contain
+            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+            transition="scale-transition"
+            width="40"
+          />
+        </router-link>
       </div>
 
       <v-spacer></v-spacer>
@@ -27,7 +29,9 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </v-main>
   </v-app>
 </template>
@@ -52,5 +56,16 @@ export default {
   }
   .gray-col {
     color: rgba(0,0,0,.6) !important;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all .3s ease;
+  }
+
+  .fade-enter,
+  .fade-leave-active {
+    opacity: 0;
+    transform: translateX(2em);
   }
 </style>

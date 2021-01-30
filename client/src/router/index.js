@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+// import axios from 'axios'
 
 Vue.use(VueRouter)
 
@@ -22,7 +23,22 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue')
-  }
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import('../views/User.vue'),
+    beforeEnter: (next) => {
+      // check if there's cookie in local
+      if(!document.cookie) {
+        this.$router.push('/login')
+        return next(false);
+      }
+      else {
+        next(true)
+      }
+    }
+  },
 ]
 
 const router = new VueRouter({
