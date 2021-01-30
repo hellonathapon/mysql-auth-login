@@ -2,8 +2,8 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
-      dark
+      elevation="0"
+      class="app-bar"
     >
       <div class="d-flex align-center">
         <v-img
@@ -14,30 +14,15 @@
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn text to="/">
-        <span class="mr-2">Home</span>
-        <v-icon>mdi-home-roof</v-icon>
-      </v-btn>
       <v-btn text to="/login">
-        <span class="mr-2">Login</span>
-        <v-icon>mdi-login-variant</v-icon>
+        <span class="mr-2 gray-col">Login</span>
       </v-btn>
       <v-btn text to="/register">
-        <span class="mr-2">Register</span>
-        <v-icon>mdi-account-plus-outline</v-icon>
+        <span class="mr-2 gray-col">Register</span>
       </v-btn>
     </v-app-bar>
 
@@ -57,3 +42,15 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+  .app-bar {
+    background: #fff !important;
+    border-width: 0 0 thin !important;
+    border-style: solid !important;
+    border-bottom-color: rgba(0,0,0,.12) !important;
+  }
+  .gray-col {
+    color: rgba(0,0,0,.6) !important;
+  }
+</style>

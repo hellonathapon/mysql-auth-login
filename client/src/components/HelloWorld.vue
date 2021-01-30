@@ -11,9 +11,10 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+        <h1 class="display-2 mb-3">
+          Welcome to Vue Express mySQL
         </h1>
+        <p class="title">Check out this project <a target="blank" href="https://github.com/hellonathapon/mysql-auth-login">source code</a></p>
       </v-col>
     </v-row>
   </v-container>
