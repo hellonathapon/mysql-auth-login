@@ -66,7 +66,7 @@ export default {
     hanldeSubmit: function(e){
       e.preventDefault();
       // console.log(this.credentials)
-      axios.post(`http://localhost:5000/auth/login`, this.credentials)
+      axios.post(`http://localhost:5000/login`, this.credentials,  {withCredentials: true})
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
