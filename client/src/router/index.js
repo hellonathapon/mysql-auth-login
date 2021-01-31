@@ -36,7 +36,7 @@ const routes = [
       // # make req to endpoint /authuser to check JWT claim
       const url = `http://localhost:5000/user`;
       try{
-        const res = await axios.post(url, localStorage.getItem('jwt'));
+        const res = await axios.post(url, {claimJwt: localStorage.getItem('jwt')});
         console.log(res)
         next();
       }catch(err) {

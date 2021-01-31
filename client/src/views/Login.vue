@@ -11,28 +11,30 @@
           <v-form
             ref="form"
             lazy-validation
+            
           >
-
             <v-text-field
               v-model="credentials.email"
-              :rules="emailRules"
+              :rules="rules.email"
               label="E-mail"
               required
+              @keyup.enter="submitLogin"
             ></v-text-field>
 
             <v-text-field
               v-model="credentials.password"
               :counter="10"
-              :rules="passwordRules"
+              :rules="rules.pwd"
               label="Password"
               required
+              @keyup.enter="submitLogin"
             ></v-text-field>
 
             <v-btn
               :disabled="!valid"
               color="success"
               class="mr-4"
-              @click="hanldeSubmit"
+              @click="submitLogin"
             >
               Login
             </v-btn>
@@ -54,16 +56,16 @@ export default {
         password: '',
       },
       valid: true,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      passwordRules: [
-        v => !!v || 'Password is required',
-      ],
+      rules: {
+        email: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        ],
+        pwd: [v => !!v || 'Password is required',]
+      },
   }),
   methods: {
-    hanldeSubmit: function(e){
+    submitLogin: function(e){
       e.preventDefault();
       this.$store.dispatch('LOGIN', this.credentials)
         .then(() => {

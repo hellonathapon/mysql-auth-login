@@ -36,14 +36,14 @@
             <v-text-field
               v-model="credentials.password"
               :counter="10"
-              :rules="rules.password"
+              :rules="rules.pwd"
               label="Password"
               required
             ></v-text-field>
             <v-text-field
               v-model="credentials.confirmPassword"
               :counter="10"
-              :rules="rules.confirmPassword"
+              :rules="rules.confirmPwd"
               label="Confirm Password"
               required
             ></v-text-field>
@@ -86,8 +86,8 @@ export default {
           v => !!v || 'E-mail is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-        password: [v => !!v || 'Password is required'],
-        confirmPassword: [v => !!v || 'Confirm Password is required']
+        pwd: [v => !!v || 'Password is required'],
+        confirmPwd: [v => !!v || 'Confirm Password is required']
       },
   }),
   methods: {
