@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   name: 'Login',
@@ -65,13 +65,14 @@ export default {
   methods: {
     hanldeSubmit: function(e){
       e.preventDefault();
-      // console.log(this.credentials)
-      axios.post(`http://localhost:5000/login`, this.credentials,  {withCredentials: true})
-        .then(res => {
-          window.localStorage.setItem("jwt", JSON.stringify(res.data.jwt));
+      this.$store.dispatch('LOGIN', this.credentials)
+        .then(() => {
+          console.log(`success from Login.vue`)
+          this.$router.push('/user')
         })
-        .then(() => this.$router.push('/user'))
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.error(`failure log from Login.vue! ${err}`)
+        })
     }
   }
 }
