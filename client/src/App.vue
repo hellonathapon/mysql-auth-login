@@ -48,6 +48,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+  * {
+    color: #2f495e;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+  }
   .app-bar {
     background: #fff !important;
     border-width: 0 0 thin !important;

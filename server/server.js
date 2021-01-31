@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// fix cross origin issue :/
+// cross origin :/
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:8080");
     res.header('Access-Control-Allow-Methods', 'DELETE, PUT, POST');
@@ -27,6 +27,7 @@ app.use(function(req, res, next) {
 // pass db connection to require file
 app.use('/register', require('./routes/register.js')(db));
 app.use('/login', require('./routes/login.js')(db));
+app.use('/user', require('./routes/authUser.js'));
 
 const port = process.env.PORT || 5000;
 

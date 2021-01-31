@@ -9,7 +9,7 @@ dotenv.config();
 module.exports = function( db ) {
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-    router.post('/', urlencodedParser, async (req, res) => {
+    router.post('/', urlencodedParser, (req, res) => {
         const {email, password} = req.body;
         try {
             db.query(' SELECT * FROM users WHERE email = ? ', [email], async (error, result) => {
@@ -18,8 +18,8 @@ module.exports = function( db ) {
 
                 // check if there's no match with any emails in DB.
                 if( !result.length ) {
-                    console.log('no data with that email!')
-                    return res.status(404).send('no data with that email!');
+                    console.log('No data with that email :/')
+                    return res.status(404).send('No data with that email :/');
                 }
 
                 // # unhash password and compare to claim one
@@ -27,19 +27,20 @@ module.exports = function( db ) {
                     return res.status(500).json({ msg: 'Email or Password is incorrect!' })
                 }
 
-                // # generate JWT to store in localstorage or cookie
+                // # generate JWT to store in cookies
                 const privateKey = process.env.JWT_PRIVATE_KEY;
                 const payload = result[0].password;
                 const token = jwt.sign({ payload },privateKey, { expiresIn: 60 * 60 })
-                const cookieOptions = { expires: new Date(Date.now() + 900000),secure:false, httpOnly: true };
+                // const cookieOptions = { expires: new Date(Date.now() + 900000),secure:false, httpOnly: false };
                 
-                res.cookie('jwt', token, cookieOptions);
-                res.status(200).send('Successfully authenticated! :)');
+                // res.cookie('jwt', token, cookieOptions);
+                res.status(200).json({jwt: token});
+
             })
 
         } catch (error) {
             console.log(error)
         }
-    })
+    });
     return router;
 }

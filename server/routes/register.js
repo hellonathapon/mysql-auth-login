@@ -3,14 +3,14 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-module.exports = function(db) {
+module.exports = function( db ) {
     const urlencodedParser = bodyParser.urlencoded({extended: false});
     
     router.post('/', urlencodedParser, (req, res) => {
         const {firstName, lastName, age, email, password, confirmPassword} = req.body;
         console.log(firstName);
         
-        // check if confirm password doesn't match 
+        // #check confirm password 
         if(password !== confirmPassword) {
             return res.status(401).json({message: 'Password not match!'});
         }
@@ -21,8 +21,8 @@ module.exports = function(db) {
 
                 // check if there's an existing email in DB.
                 if( result.length >= 1 ) {
-                    console.log('that email is in used try to login instead!')
-                    return res.status(409).send();
+                    console.log('The email is already in used please try to login instead!')
+                    return res.status(409).send('The email is already in used please try to login instead!');
                 }
                 // hash the password and store in DB.
                 bcrypt.hash(password, 10, (err, hashPassword) => {
@@ -36,7 +36,6 @@ module.exports = function(db) {
                         password: hashPassword,
                     }, (err, result) => {
                         if(err) throw err;
-                        console.log(result);
                         res.status(201).send();
                     })
                 })

@@ -3,8 +3,8 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12">
-            <h2 class="display-2 text-center">Welcome</h2>
-            <p class="title text-center">Sign In to your account</p>
+            <h2 class="display-2 text-center">Hello World!</h2>
+            <p class="title text-center">Log In to your account</p>
         </v-col>
 
         <v-col cols="8">
@@ -68,9 +68,9 @@ export default {
       // console.log(this.credentials)
       axios.post(`http://localhost:5000/login`, this.credentials,  {withCredentials: true})
         .then(res => {
-          console.log(res)
-          this.$router.push('/user')
+          window.localStorage.setItem("jwt", JSON.stringify(res.data.jwt));
         })
+        .then(() => this.$router.push('/user'))
         .catch(err => console.log(err))
     }
   }

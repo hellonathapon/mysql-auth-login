@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-// import axios from 'axios'
+import axios from 'axios'
 
 Vue.use(VueRouter)
 
@@ -28,15 +28,21 @@ const routes = [
     path: '/user',
     name: 'User',
     component: () => import('../views/User.vue'),
-    beforeEnter: (next) => {
-      // check if there's cookie in local
-      if(!document.cookie) {
-        this.$router.push('/login')
-        return next(false);
+    beforeEnter: (to, from, next) => {
+      if(!localStorage.getItem('jwt')){
+        next("/login")
       }
-      else {
-        next(true)
-      }
+      // # make req to endpoint /authuser to check JWT claim
+      const url = `http://localhost:5000/authuser`;
+      axios.post(url, localStorage.getItem('jwt'))
+        .then(res => {
+          console.log(res)
+          //# proceed to protected route
+        })
+        .catch(err => {
+          console.log(err)
+          //# deny access to protected route :/
+        });
     }
   },
 ]
