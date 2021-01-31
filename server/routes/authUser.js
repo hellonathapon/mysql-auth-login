@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/user', (req, res) => {
-    console.log('hit user endpoint')
+router.post('/', (req, res) => {
+    res.status(200).send('fine!');
 })
 
 module.exports = router;
